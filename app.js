@@ -1,4 +1,4 @@
-class TechPrepApp {
+class TheInterviewCodeApp {
     constructor() {
         this.dsaQuestions = [];
         this.mlQuestions = [];
@@ -242,7 +242,7 @@ class TechPrepApp {
             event.preventDefault();
         }
         if (title) {
-            document.title = title + ' - TechPrep';
+            document.title = title + ' - TheInterviewCode';
         }
     }
 
@@ -513,9 +513,13 @@ class TechPrepApp {
         
         if (sectionName === 'solution') {
             if (breadcrumb) breadcrumb.classList.remove('hidden');
-            if (searchSection) searchSection.style.display = 'none';
         } else {
             if (breadcrumb) breadcrumb.classList.add('hidden');
+        }
+
+        if (sectionName === 'home' || sectionName === 'about' || sectionName === 'solution') {
+            if (searchSection) searchSection.style.display = 'none';
+        } else {
             if (searchSection) searchSection.style.display = 'block';
         }
 
@@ -680,7 +684,7 @@ class TechPrepApp {
             codeEl.innerHTML = `
                 <h3>Code Implementation</h3>
                 <div class="code-block">
-                    <button class="copy-code-btn" onclick="window.techPrepApp.copyCode(this)">Copy</button>
+                    <button class="copy-code-btn" onclick="window.theInterviewCodeApp.copyCode(this)">Copy</button>
                     <pre><code class="language-python">${this.escapeHtml(code)}</code></pre>
                 </div>
             `;
@@ -1083,5 +1087,5 @@ class TechPrepApp {
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
-    window.techPrepApp = new TechPrepApp();
+    window.theInterviewCodeApp = new TheInterviewCodeApp();
 });
