@@ -126,7 +126,7 @@ class TheInterviewCodeApp {
 
         // Load DSA Questions from blind75_questions.json
         try {
-            const dsaResp = await fetch('/blind75_questions.json');
+            const dsaResp = await fetch('blind75_questions.json');
             this.dsaQuestions = await dsaResp.json();
         } catch (err) {
             console.error('Failed to load DSA questions:', err);
@@ -135,7 +135,7 @@ class TheInterviewCodeApp {
 
         // Load ML Questions from ml_100_questions.json
         try {
-            const mlResp = await fetch('/ml_100_questions.json');
+            const mlResp = await fetch('ml_100_questions.json');
             const mlData = await mlResp.json();
             // Add slugs to ML questions if they don't have them
             this.mlQuestions = mlData.map(q => ({
