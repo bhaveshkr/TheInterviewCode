@@ -1,0 +1,810 @@
+[
+  {
+    "id": 1,
+    "title": "What is Machine Learning?",
+    "category": "Fundamentals",
+    "difficulty": "Easy",
+    "question": "Define machine learning and explain its main types.",
+    "answer": "Machine learning is a subset of AI that enables computers to learn and make decisions from data without explicit programming. Main types: Supervised (labeled data), Unsupervised (unlabeled data), Reinforcement (reward-based learning).",
+    "explanation": "Let's understand this with simple examples:\n\n1. Supervised Learning:\nImagine teaching a child to identify fruits. You show them apples and oranges (labeled data) until they learn to distinguish between them.\nExample: Email spam detection where the model learns from emails marked as 'spam' or 'not spam'.\n\n2. Unsupervised Learning:\nLike grouping similar colored candies without knowing their flavors.\nExample: Customer segmentation where the model groups customers with similar buying patterns.\n\n3. Reinforcement Learning:\nLike training a dog - good behavior gets treats (rewards), bad behavior gets nothing.\nExample: A game-playing AI that learns by winning (reward) or losing (punishment).\n\nKey difference: Supervised learning is like learning with a teacher, unsupervised is like self-study, and reinforcement is like learning from experience."
+  },
+  {
+    "id": 2,
+    "title": "Supervised vs Unsupervised Learning",
+    "category": "Fundamentals",
+    "difficulty": "Easy",
+    "question": "What's the difference between supervised and unsupervised learning?",
+    "answer": "Supervised learning uses labeled data to predict outcomes (classification/regression). Unsupervised learning finds patterns in unlabeled data (clustering/dimensionality reduction).",
+    "explanation": "Let's break this down with a real-world analogy:\n\nSupervised Learning:\n- Like studying with a teacher who provides questions and correct answers\n- Example 1 (Classification): Teaching a model to identify cats vs dogs using labeled images\n- Example 2 (Regression): Predicting house prices based on features like size, location, age\n\nUnsupervised Learning:\n- Like organizing your closet without any predefined categories\n- Example 1 (Clustering): Grouping customers based on shopping behavior without predefined groups\n- Example 2 (Dimensionality Reduction): Compressing a high-resolution image while keeping important features\n\nKey Differences:\n1. Data Labels: Supervised needs labeled data, unsupervised doesn't\n2. Output: Supervised predicts specific outcomes, unsupervised finds hidden patterns\n3. Accuracy Measurement: Supervised can measure accuracy against correct answers, unsupervised uses indirect metrics"
+  },
+  {
+    "id": 3,
+    "title": "Overfitting and Underfitting",
+    "category": "Model Performance",
+    "difficulty": "Easy",
+    "question": "Explain overfitting and underfitting with prevention methods.",
+    "answer": "Overfitting: Model memorizes training data, poor generalization. Prevention: regularization, cross-validation, more data. Underfitting: Model too simple, poor performance. Prevention: more complex models, better features.",
+    "explanation": "Let's understand this with a simple memorization vs. learning analogy:\n\nOverfitting:\n- Like a student who memorizes exam answers without understanding the concept\n- Real Example: A model that learns to recognize cats in images by memorizing exact pixel patterns of training images, failing on new images\n\nPreventing Overfitting:\n1. Regularization: Like adding a penalty for complex answers\n2. Cross-validation: Testing understanding on different sets of problems\n3. More data: Learning from more diverse examples\n\nUnderfitting:\n- Like using only addition to solve all math problems\n- Real Example: Using linear regression to model clearly non-linear data\n\nPreventing Underfitting:\n1. Increase model complexity: Using more sophisticated algorithms\n2. Add features: Including more relevant information\n3. Reduce regularization: Allowing model to be more flexible\n\nVisual Example:\nImagine fitting a curve to data points:\n- Underfitting: Straight line through curved data\n- Good fit: Smooth curve following the trend\n- Overfitting: Curve passing through every point exactly"
+  }
+  ,
+  {
+    "id": 4,
+    "title": "Bias vs Variance",
+    "category": "Model Performance",
+    "difficulty": "Medium",
+    "question": "Explain bias and variance in machine learning.",
+    "answer": "Bias is error from erroneous assumptions; variance is error from sensitivity to small fluctuations in the training set. High bias leads to underfitting, high variance to overfitting."
+  },
+  {
+    "id": 5,
+    "title": "Types of Machine Learning Algorithms",
+    "category": "Fundamentals",
+    "difficulty": "Easy",
+    "question": "List and briefly describe common types of ML algorithms.",
+    "answer": "Supervised (classification, regression), unsupervised (clustering, dimensionality reduction), semi-supervised, reinforcement learning."
+  },
+  {
+    "id": 6,
+    "title": "Classification vs Regression",
+    "category": "Algorithms",
+    "difficulty": "Easy",
+    "question": "What is the difference between classification and regression?",
+    "answer": "Classification predicts discrete labels; regression predicts continuous values."
+  },
+  {
+    "id": 7,
+    "title": "Confusion Matrix",
+    "category": "Model Evaluation",
+    "difficulty": "Medium",
+    "question": "What is a confusion matrix and what are its components?",
+    "answer": "A confusion matrix shows true positives, true negatives, false positives, and false negatives for classification results."
+  },
+  {
+    "id": 8,
+    "title": "Precision, Recall, F1 Score",
+    "category": "Model Evaluation",
+    "difficulty": "Medium",
+    "question": "Define precision, recall, and F1 score.",
+    "answer": "Precision: TP/(TP+FP), Recall: TP/(TP+FN), F1: harmonic mean of precision and recall."
+  },
+  {
+    "id": 9,
+    "title": "ROC Curve and AUC",
+    "category": "Model Evaluation",
+    "difficulty": "Medium",
+    "question": "What is an ROC curve and what does AUC represent?",
+    "answer": "ROC curve plots TPR vs FPR at various thresholds; AUC measures overall ability to distinguish classes."
+  },
+  {
+    "id": 10,
+    "title": "Feature Engineering",
+    "category": "Feature Engineering",
+    "difficulty": "Medium",
+    "question": "What is feature engineering and why is it important?",
+    "answer": "Feature engineering is creating new input features from raw data to improve model performance."
+  },
+  {
+    "id": 11,
+    "title": "Dimensionality Reduction",
+    "category": "Feature Engineering",
+    "difficulty": "Medium",
+    "question": "What is dimensionality reduction? Name two techniques.",
+    "answer": "Reducing number of input variables. Techniques: PCA, t-SNE."
+  },
+  {
+    "id": 12,
+    "title": "Principal Component Analysis (PCA)",
+    "category": "Feature Engineering",
+    "difficulty": "Medium",
+    "question": "Explain PCA and its use in ML.",
+    "answer": "PCA transforms data to new axes maximizing variance, used for dimensionality reduction."
+  },
+  {
+    "id": 13,
+    "title": "Clustering Algorithms",
+    "category": "Algorithms",
+    "difficulty": "Medium",
+    "question": "Name and describe two clustering algorithms.",
+    "answer": "K-Means: partitions data into k clusters. DBSCAN: density-based clustering."
+  },
+  {
+    "id": 14,
+    "title": "KNN Algorithm",
+    "category": "Algorithms",
+    "difficulty": "Easy",
+    "question": "Describe the K-Nearest Neighbors algorithm.",
+    "answer": "KNN classifies based on majority label among k nearest data points."
+  },
+  {
+    "id": 15,
+    "title": "Decision Trees",
+    "category": "Algorithms",
+    "difficulty": "Easy",
+    "question": "What is a decision tree and how does it work?",
+    "answer": "A tree structure where nodes represent decisions based on feature values, leading to predictions."
+  },
+  {
+    "id": 16,
+    "title": "Random Forests",
+    "category": "Algorithms",
+    "difficulty": "Medium",
+    "question": "Explain random forests and their advantages.",
+    "answer": "Ensemble of decision trees, reduces overfitting, improves accuracy."
+  },
+  {
+    "id": 17,
+    "title": "Gradient Boosting",
+    "category": "Algorithms",
+    "difficulty": "Medium",
+    "question": "What is gradient boosting?",
+    "answer": "Sequentially builds models to correct errors of previous ones, e.g., XGBoost, LightGBM."
+  },
+  {
+    "id": 18,
+    "title": "Hyperparameter Tuning",
+    "category": "Model Optimization",
+    "difficulty": "Medium",
+    "question": "What is hyperparameter tuning? Name two methods.",
+    "answer": "Optimizing model parameters not learned during training. Methods: grid search, random search."
+  },
+  {
+    "id": 19,
+    "title": "Cross-Validation",
+    "category": "Model Evaluation",
+    "difficulty": "Medium",
+    "question": "Explain cross-validation and its purpose.",
+    "answer": "Splits data into folds, trains on some, tests on others, improves generalization."
+  },
+  {
+    "id": 20,
+    "title": "Ensemble Methods",
+    "category": "Algorithms",
+    "difficulty": "Medium",
+    "question": "What are ensemble methods? Give examples.",
+    "answer": "Combine multiple models to improve performance. Examples: bagging, boosting, stacking."
+  }
+  ,
+  {
+    "id": 21,
+    "title": "Bagging vs Boosting",
+    "category": "Algorithms",
+    "difficulty": "Medium",
+    "question": "Compare bagging and boosting.",
+    "answer": "Bagging trains models independently, boosting trains sequentially correcting errors."
+  },
+  {
+    "id": 22,
+    "title": "Support Vector Machines (SVM)",
+    "category": "Algorithms",
+    "difficulty": "Medium",
+    "question": "Describe SVM and its kernel trick.",
+    "answer": "SVM finds optimal hyperplane; kernel trick maps data to higher dimensions for separation."
+  },
+  {
+    "id": 23,
+    "title": "Naive Bayes Classifier",
+    "category": "Algorithms",
+    "difficulty": "Easy",
+    "question": "Explain the Naive Bayes classifier.",
+    "answer": "Probabilistic classifier assuming feature independence, based on Bayes' theorem."
+  },
+  {
+    "id": 24,
+    "title": "Logistic Regression",
+    "category": "Algorithms",
+    "difficulty": "Easy",
+    "question": "What is logistic regression used for?",
+    "answer": "Binary classification, predicts probability using sigmoid function."
+  },
+  {
+    "id": 25,
+    "title": "Linear Regression",
+    "category": "Algorithms",
+    "difficulty": "Easy",
+    "question": "Describe linear regression.",
+    "answer": "Predicts continuous output as a linear combination of input features."
+  },
+  {
+    "id": 26,
+    "title": "Cost Function",
+    "category": "Model Optimization",
+    "difficulty": "Medium",
+    "question": "What is a cost function? Give examples.",
+    "answer": "Measures error between predictions and actual values. Examples: MSE, cross-entropy."
+  },
+  {
+    "id": 27,
+    "title": "Gradient Descent",
+    "category": "Model Optimization",
+    "difficulty": "Medium",
+    "question": "Explain gradient descent.",
+    "answer": "Iterative optimization algorithm to minimize cost function by updating parameters."
+  },
+  {
+    "id": 28,
+    "title": "Learning Rate",
+    "category": "Model Optimization",
+    "difficulty": "Medium",
+    "question": "What is learning rate and its effect?",
+    "answer": "Controls step size in gradient descent. Too high: overshoot minimum; too low: slow convergence."
+  },
+  {
+    "id": 29,
+    "title": "Epochs and Batch Size",
+    "category": "Model Optimization",
+    "difficulty": "Easy",
+    "question": "Define epochs and batch size.",
+    "answer": "Epoch: one pass over training data. Batch size: number of samples processed before updating model."
+  },
+  {
+    "id": 30,
+    "title": "Early Stopping",
+    "category": "Model Optimization",
+    "difficulty": "Medium",
+    "question": "What is early stopping?",
+    "answer": "Technique to stop training when validation performance stops improving, prevents overfitting."
+  },
+  {
+    "id": 31,
+    "title": "Regularization",
+    "category": "Model Optimization",
+    "difficulty": "Medium",
+    "question": "What is regularization? Name two types.",
+    "answer": "Adds penalty to cost function to prevent overfitting. Types: L1 (lasso), L2 (ridge)."
+  },
+  {
+    "id": 32,
+    "title": "Feature Selection",
+    "category": "Feature Engineering",
+    "difficulty": "Medium",
+    "question": "What is feature selection and why is it important?",
+    "answer": "Selecting relevant features improves model accuracy and reduces complexity."
+  },
+  {
+    "id": 33,
+    "title": "Imbalanced Data",
+    "category": "Data Preprocessing",
+    "difficulty": "Medium",
+    "question": "How do you handle imbalanced datasets?",
+    "answer": "Techniques: resampling, SMOTE, class weights, anomaly detection."
+  },
+  {
+    "id": 34,
+    "title": "Data Preprocessing Steps",
+    "category": "Data Preprocessing",
+    "difficulty": "Easy",
+    "question": "List common data preprocessing steps.",
+    "answer": "Cleaning, normalization, encoding, handling missing values, feature scaling."
+  },
+  {
+    "id": 35,
+    "title": "Missing Data Handling",
+    "category": "Data Preprocessing",
+    "difficulty": "Medium",
+    "question": "How do you handle missing data?",
+    "answer": "Imputation (mean, median, mode), removal, prediction, interpolation."
+  },
+  {
+    "id": 36,
+    "title": "One-Hot Encoding",
+    "category": "Data Preprocessing",
+    "difficulty": "Easy",
+    "question": "What is one-hot encoding?",
+    "answer": "Converts categorical variables into binary vectors for each category."
+  },
+  {
+    "id": 37,
+    "title": "Label Encoding",
+    "category": "Data Preprocessing",
+    "difficulty": "Easy",
+    "question": "What is label encoding?",
+    "answer": "Assigns integer values to categorical variables."
+  },
+  {
+    "id": 38,
+    "title": "Feature Scaling",
+    "category": "Data Preprocessing",
+    "difficulty": "Easy",
+    "question": "Why is feature scaling important?",
+    "answer": "Ensures features contribute equally, improves convergence of algorithms."
+  },
+  {
+    "id": 39,
+    "title": "Normalization vs Standardization",
+    "category": "Data Preprocessing",
+    "difficulty": "Medium",
+    "question": "Compare normalization and standardization.",
+    "answer": "Normalization scales to [0,1]; standardization centers to mean 0, std 1."
+  },
+  {
+    "id": 40,
+    "title": "Curse of Dimensionality",
+    "category": "Feature Engineering",
+    "difficulty": "Medium",
+    "question": "What is the curse of dimensionality?",
+    "answer": "Problems arise as number of features increases, leading to sparse data and poor model performance."
+  }
+  ,
+  {
+    "id": 41,
+    "title": "Activation Functions",
+    "category": "Deep Learning",
+    "difficulty": "Medium",
+    "question": "Name common activation functions in neural networks.",
+    "answer": "Sigmoid, tanh, ReLU, softmax."
+  },
+  {
+    "id": 42,
+    "title": "Neural Networks",
+    "category": "Deep Learning",
+    "difficulty": "Medium",
+    "question": "What is a neural network?",
+    "answer": "A network of interconnected nodes (neurons) that learn representations from data."
+  },
+  {
+    "id": 43,
+    "title": "Deep Learning vs Traditional ML",
+    "category": "Deep Learning",
+    "difficulty": "Medium",
+    "question": "Compare deep learning and traditional machine learning.",
+    "answer": "Deep learning uses neural networks for automatic feature extraction; traditional ML relies on manual feature engineering."
+  },
+  {
+    "id": 44,
+    "title": "Convolutional Neural Networks (CNN)",
+    "category": "Deep Learning",
+    "difficulty": "Medium",
+    "question": "What are CNNs used for?",
+    "answer": "Image and spatial data processing, feature extraction using convolutional layers."
+  },
+  {
+    "id": 45,
+    "title": "Recurrent Neural Networks (RNN)",
+    "category": "Deep Learning",
+    "difficulty": "Medium",
+    "question": "What are RNNs used for?",
+    "answer": "Sequential data processing, e.g., time series, text."
+  },
+  {
+    "id": 46,
+    "title": "LSTM and GRU",
+    "category": "Deep Learning",
+    "difficulty": "Medium",
+    "question": "What are LSTM and GRU?",
+    "answer": "Variants of RNNs designed to capture long-term dependencies."
+  },
+  {
+    "id": 47,
+    "title": "Transfer Learning",
+    "category": "Deep Learning",
+    "difficulty": "Medium",
+    "question": "What is transfer learning?",
+    "answer": "Using pre-trained models on new tasks to leverage learned features."
+  },
+  {
+    "id": 48,
+    "title": "Autoencoders",
+    "category": "Deep Learning",
+    "difficulty": "Medium",
+    "question": "What is an autoencoder?",
+    "answer": "Neural network that learns compressed representations of data."
+  },
+  {
+    "id": 49,
+    "title": "Generative Adversarial Networks (GAN)",
+    "category": "Deep Learning",
+    "difficulty": "Hard",
+    "question": "Explain GANs and their applications.",
+    "answer": "GANs consist of generator and discriminator networks, used for data generation, image synthesis."
+  },
+  {
+    "id": 50,
+    "title": "Dropout in Neural Networks",
+    "category": "Deep Learning",
+    "difficulty": "Medium",
+    "question": "What is dropout and why is it used?",
+    "answer": "Randomly drops neurons during training to prevent overfitting."
+  },
+  {
+    "id": 51,
+    "title": "Batch Normalization",
+    "category": "Deep Learning",
+    "difficulty": "Medium",
+    "question": "What is batch normalization?",
+    "answer": "Normalizes layer inputs to stabilize and speed up training."
+  },
+  {
+    "id": 52,
+    "title": "Vanishing/Exploding Gradients",
+    "category": "Deep Learning",
+    "difficulty": "Hard",
+    "question": "Explain vanishing and exploding gradients.",
+    "answer": "Gradients become too small or large, hindering learning in deep networks."
+  },
+  {
+    "id": 53,
+    "title": "Attention Mechanism",
+    "category": "Deep Learning",
+    "difficulty": "Hard",
+    "question": "What is the attention mechanism in neural networks?",
+    "answer": "Allows models to focus on relevant parts of input, improves sequence modeling."
+  },
+  {
+    "id": 54,
+    "title": "Transformer Architecture",
+    "category": "Deep Learning",
+    "difficulty": "Hard",
+    "question": "Describe the transformer architecture.",
+    "answer": "Uses self-attention and feed-forward layers, excels in NLP tasks."
+  },
+  {
+    "id": 55,
+    "title": "Word Embeddings",
+    "category": "NLP",
+    "difficulty": "Medium",
+    "question": "What are word embeddings?",
+    "answer": "Dense vector representations of words capturing semantic meaning."
+  },
+  {
+    "id": 56,
+    "title": "TF-IDF",
+    "category": "NLP",
+    "difficulty": "Medium",
+    "question": "What is TF-IDF and its use?",
+    "answer": "Term Frequency-Inverse Document Frequency, measures importance of words in documents."
+  },
+  {
+    "id": 57,
+    "title": "Sequence-to-Sequence Models",
+    "category": "NLP",
+    "difficulty": "Hard",
+    "question": "What are seq2seq models?",
+    "answer": "Models mapping input sequences to output sequences, used in translation, summarization."
+  },
+  {
+    "id": 58,
+    "title": "Text Classification",
+    "category": "NLP",
+    "difficulty": "Medium",
+    "question": "How is text classification performed?",
+    "answer": "Using algorithms like Naive Bayes, SVM, deep learning, with feature extraction."
+  },
+  {
+    "id": 59,
+    "title": "Sentiment Analysis",
+    "category": "NLP",
+    "difficulty": "Medium",
+    "question": "What is sentiment analysis?",
+    "answer": "Classifies text as positive, negative, or neutral sentiment."
+  },
+  {
+    "id": 60,
+    "title": "Image Classification",
+    "category": "Computer Vision",
+    "difficulty": "Medium",
+    "question": "How is image classification performed?",
+    "answer": "Using CNNs to extract features and classify images."
+  }
+  ,
+  {
+    "id": 61,
+    "title": "Object Detection",
+    "category": "Computer Vision",
+    "difficulty": "Hard",
+    "question": "What is object detection?",
+    "answer": "Identifies and locates objects in images, e.g., YOLO, Faster R-CNN."
+  },
+  {
+    "id": 62,
+    "title": "Image Segmentation",
+    "category": "Computer Vision",
+    "difficulty": "Hard",
+    "question": "What is image segmentation?",
+    "answer": "Divides image into regions for analysis, e.g., semantic, instance segmentation."
+  },
+  {
+    "id": 63,
+    "title": "Data Augmentation",
+    "category": "Computer Vision",
+    "difficulty": "Medium",
+    "question": "What is data augmentation?",
+    "answer": "Generates new training samples by transforming existing data, improves generalization."
+  },
+  {
+    "id": 64,
+    "title": "Anomaly Detection",
+    "category": "Algorithms",
+    "difficulty": "Medium",
+    "question": "What is anomaly detection?",
+    "answer": "Identifies rare or unusual data points, used in fraud detection, monitoring."
+  },
+  {
+    "id": 65,
+    "title": "Time Series Forecasting",
+    "category": "Algorithms",
+    "difficulty": "Medium",
+    "question": "How is time series forecasting performed?",
+    "answer": "Using ARIMA, LSTM, Prophet, models learn temporal patterns."
+  },
+  {
+    "id": 66,
+    "title": "Cold Start Problem",
+    "category": "Recommendation Systems",
+    "difficulty": "Medium",
+    "question": "What is the cold start problem in recommendation systems?",
+    "answer": "Difficulty in recommending items to new users/items due to lack of data."
+  },
+  {
+    "id": 67,
+    "title": "Collaborative Filtering",
+    "category": "Recommendation Systems",
+    "difficulty": "Medium",
+    "question": "Explain collaborative filtering.",
+    "answer": "Recommends items based on user similarity or item similarity."
+  },
+  {
+    "id": 68,
+    "title": "Content-Based Filtering",
+    "category": "Recommendation Systems",
+    "difficulty": "Medium",
+    "question": "Explain content-based filtering.",
+    "answer": "Recommends items based on item features and user preferences."
+  },
+  {
+    "id": 69,
+    "title": "Evaluation Metrics for Recommenders",
+    "category": "Recommendation Systems",
+    "difficulty": "Medium",
+    "question": "Name metrics for evaluating recommendation systems.",
+    "answer": "Precision, recall, MAP, NDCG, RMSE."
+  },
+  {
+    "id": 70,
+    "title": "Model Deployment",
+    "category": "Deployment",
+    "difficulty": "Medium",
+    "question": "How do you deploy a machine learning model?",
+    "answer": "Export model, create API (Flask, FastAPI), containerize (Docker), monitor performance."
+  },
+  {
+    "id": 71,
+    "title": "Model Monitoring",
+    "category": "Deployment",
+    "difficulty": "Medium",
+    "question": "Why is model monitoring important?",
+    "answer": "Detects data drift, performance degradation, ensures reliability."
+  },
+  {
+    "id": 72,
+    "title": "Data Drift",
+    "category": "Deployment",
+    "difficulty": "Medium",
+    "question": "What is data drift?",
+    "answer": "Change in data distribution over time, can degrade model performance."
+  },
+  {
+    "id": 73,
+    "title": "Explainability in ML",
+    "category": "Ethics & Explainability",
+    "difficulty": "Medium",
+    "question": "Why is explainability important in ML?",
+    "answer": "Builds trust, meets regulations, helps debug models."
+  },
+  {
+    "id": 74,
+    "title": "SHAP and LIME",
+    "category": "Ethics & Explainability",
+    "difficulty": "Hard",
+    "question": "What are SHAP and LIME?",
+    "answer": "Model-agnostic tools for explaining predictions by attributing feature importance."
+  },
+  {
+    "id": 75,
+    "title": "Ethics in Machine Learning",
+    "category": "Ethics & Explainability",
+    "difficulty": "Medium",
+    "question": "List some ethical concerns in ML.",
+    "answer": "Bias, fairness, privacy, transparency, accountability."
+  },
+  {
+    "id": 76,
+    "title": "Fairness in ML",
+    "category": "Ethics & Explainability",
+    "difficulty": "Medium",
+    "question": "How can fairness be ensured in ML models?",
+    "answer": "Balanced data, bias detection, fairness metrics, transparent algorithms."
+  },
+  {
+    "id": 77,
+    "title": "Privacy in ML",
+    "category": "Ethics & Explainability",
+    "difficulty": "Medium",
+    "question": "How is privacy protected in ML?",
+    "answer": "Data anonymization, differential privacy, secure data handling."
+  },
+  {
+    "id": 78,
+    "title": "Reproducibility",
+    "category": "Best Practices",
+    "difficulty": "Medium",
+    "question": "Why is reproducibility important in ML?",
+    "answer": "Ensures results can be verified, builds trust, aids collaboration."
+  },
+  {
+    "id": 79,
+    "title": "Version Control for Models",
+    "category": "Best Practices",
+    "difficulty": "Medium",
+    "question": "How is version control applied to ML models?",
+    "answer": "Track model changes, use tools like DVC, MLflow, Git."
+  },
+  {
+    "id": 80,
+    "title": "Experiment Tracking",
+    "category": "Best Practices",
+    "difficulty": "Medium",
+    "question": "What is experiment tracking?",
+    "answer": "Logging parameters, metrics, results for reproducibility and comparison."
+  }
+  ,
+  {
+    "id": 81,
+    "title": "Feature Importance",
+    "category": "Model Evaluation",
+    "difficulty": "Medium",
+    "question": "How is feature importance determined?",
+    "answer": "Using model coefficients, tree-based methods, permutation importance."
+  },
+  {
+    "id": 82,
+    "title": "Model Interpretability",
+    "category": "Ethics & Explainability",
+    "difficulty": "Medium",
+    "question": "What is model interpretability?",
+    "answer": "Ability to understand and explain model predictions."
+  },
+  {
+    "id": 83,
+    "title": "Data Leakage",
+    "category": "Data Preprocessing",
+    "difficulty": "Medium",
+    "question": "What is data leakage and how to prevent it?",
+    "answer": "Unintended sharing of information between train/test sets. Prevent by proper data splitting."
+  },
+  {
+    "id": 84,
+    "title": "Class Imbalance Solutions",
+    "category": "Data Preprocessing",
+    "difficulty": "Medium",
+    "question": "How do you address class imbalance?",
+    "answer": "Resampling, synthetic data, cost-sensitive learning."
+  },
+  {
+    "id": 85,
+    "title": "Model Generalization",
+    "category": "Model Performance",
+    "difficulty": "Medium",
+    "question": "What is model generalization?",
+    "answer": "Ability to perform well on unseen data."
+  },
+  {
+    "id": 86,
+    "title": "Grid Search vs Random Search",
+    "category": "Model Optimization",
+    "difficulty": "Medium",
+    "question": "Compare grid search and random search for hyperparameter tuning.",
+    "answer": "Grid search tests all combinations; random search samples randomly, often more efficient."
+  },
+  {
+    "id": 87,
+    "title": "Model Complexity",
+    "category": "Model Performance",
+    "difficulty": "Medium",
+    "question": "How does model complexity affect performance?",
+    "answer": "Too complex: overfitting; too simple: underfitting."
+  },
+  {
+    "id": 88,
+    "title": "Learning Curves",
+    "category": "Model Evaluation",
+    "difficulty": "Medium",
+    "question": "What are learning curves?",
+    "answer": "Plots of model performance vs training size, diagnose under/overfitting."
+  },
+  {
+    "id": 89,
+    "title": "Bootstrapping",
+    "category": "Algorithms",
+    "difficulty": "Medium",
+    "question": "What is bootstrapping in ML?",
+    "answer": "Sampling with replacement to estimate statistics, used in bagging."
+  },
+  {
+    "id": 90,
+    "title": "Outlier Detection",
+    "category": "Algorithms",
+    "difficulty": "Medium",
+    "question": "How are outliers detected?",
+    "answer": "Statistical methods, clustering, isolation forest, visual inspection."
+  },
+  {
+    "id": 91,
+    "title": "Data Annotation",
+    "category": "Data Preprocessing",
+    "difficulty": "Medium",
+    "question": "What is data annotation?",
+    "answer": "Labeling data for supervised learning, e.g., images, text."
+  },
+  {
+    "id": 92,
+    "title": "Synthetic Data Generation",
+    "category": "Data Preprocessing",
+    "difficulty": "Medium",
+    "question": "Why generate synthetic data?",
+    "answer": "Augments small datasets, improves model robustness."
+  },
+  {
+    "id": 93,
+    "title": "Feature Extraction",
+    "category": "Feature Engineering",
+    "difficulty": "Medium",
+    "question": "What is feature extraction?",
+    "answer": "Transforming raw data into informative features for modeling."
+  },
+  {
+    "id": 94,
+    "title": "Model Serialization",
+    "category": "Deployment",
+    "difficulty": "Medium",
+    "question": "What is model serialization?",
+    "answer": "Saving trained models to disk for later use, e.g., pickle, joblib."
+  },
+  {
+    "id": 95,
+    "title": "Online vs Batch Learning",
+    "category": "Algorithms",
+    "difficulty": "Medium",
+    "question": "Compare online and batch learning.",
+    "answer": "Online: updates model with each new data point; batch: trains on entire dataset at once."
+  },
+  {
+    "id": 96,
+    "title": "Reinforcement Learning",
+    "category": "Algorithms",
+    "difficulty": "Medium",
+    "question": "What is reinforcement learning?",
+    "answer": "Learning by interacting with environment, receiving rewards/punishments."
+  },
+  {
+    "id": 97,
+    "title": "Markov Decision Process (MDP)",
+    "category": "Algorithms",
+    "difficulty": "Hard",
+    "question": "What is an MDP in RL?",
+    "answer": "Mathematical framework for modeling decision making, includes states, actions, rewards."
+  },
+  {
+    "id": 98,
+    "title": "Q-Learning",
+    "category": "Algorithms",
+    "difficulty": "Hard",
+    "question": "Explain Q-learning.",
+    "answer": "Model-free RL algorithm learning value of actions for optimal policy."
+  },
+  {
+    "id": 99,
+    "title": "Policy Gradient Methods",
+    "category": "Algorithms",
+    "difficulty": "Hard",
+    "question": "What are policy gradient methods?",
+    "answer": "RL algorithms optimizing policy directly via gradients."
+  },
+  {
+    "id": 100,
+    "title": "Challenges in ML Projects",
+    "category": "Best Practices",
+    "difficulty": "Medium",
+    "question": "List common challenges in ML projects.",
+    "answer": "Data quality, feature selection, model selection, deployment, monitoring, scalability."
+  }
+]
