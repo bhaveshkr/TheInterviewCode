@@ -411,7 +411,7 @@ class TheInterviewCodeApp {
 
     getSectionTitle(section) {
         const titles = {
-            'home': 'TheInterviewCode - DSA & ML Interview Questions',
+            'home': 'TheInterviewCode - DSA + ML prep made easy.',
             'dsa': 'Data Structures & Algorithms',
             'ml': 'Machine Learning Questions',
             'about': 'About TheInterviewCode'
