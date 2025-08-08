@@ -17,23 +17,6 @@ class TheInterviewCodeApp {
         this.mlDisplayCount = 12;
         this.isLoading = false;
 
-        const path = window.location.pathname;
-        if (path.startsWith('/dsa/')) {
-            const slug = path.split('/').pop();
-            if (slug && slug !== 'dsa') {
-                setTimeout(() => this.showQuestionBySlug(slug, 'dsa'), 200);
-            } else {
-                this.showSection('dsa');
-            }
-        } else if (path.startsWith('/ml/')) {
-            const slug = path.split('/').pop();
-            if (slug && slug !== 'ml') {
-                setTimeout(() => this.showQuestionBySlug(slug, 'ml'), 200);
-            } else {
-                this.showSection('ml');
-            }
-        }
-
         this.init();
     }
 
@@ -126,7 +109,7 @@ class TheInterviewCodeApp {
 
         // Load DSA Questions from blind75_questions.json
         try {
-            const dsaResp = await fetch('/blind75_questions.json');
+            const dsaResp = await fetch('blind75_questions.json');
             this.dsaQuestions = await dsaResp.json();
         } catch (err) {
             console.error('Failed to load DSA questions:', err);
@@ -135,7 +118,7 @@ class TheInterviewCodeApp {
 
         // Load ML Questions from ml_100_questions.json
         try {
-            const mlResp = await fetch('/ml_100_questions.json');
+            const mlResp = await fetch('ml_100_questions.json');
             const mlData = await mlResp.json();
             // Add slugs to ML questions if they don't have them
             this.mlQuestions = mlData.map(q => ({
@@ -216,30 +199,30 @@ class TheInterviewCodeApp {
     }
 
     handleInitialRoute() {
-        const path = window.location.pathname;
+        const hash = window.location.hash;
         
-        if (path.startsWith('/dsa/question/')) {
-            const slug = path.split('/').pop();
+        // Handle hash routing
+        if (hash.startsWith('#dsa/') && hash !== '#dsa') {
+            const slug = hash.substring(5); // Remove '#dsa/'
             setTimeout(() => this.showQuestionBySlug(slug, 'dsa'), 200);
-        } else if (path.startsWith('/ml/question/')) {
-            const slug = path.split('/').pop();
+        } else if (hash.startsWith('#ml/') && hash !== '#ml') {
+            const slug = hash.substring(4); // Remove '#ml/'
             setTimeout(() => this.showQuestionBySlug(slug, 'ml'), 200);
-        } else if (path.startsWith('/dsa')) {
+        } else if (hash === '#dsa') {
             this.showSection('dsa');
-        } else if (path.startsWith('/ml')) {
+        } else if (hash === '#ml') {
             this.showSection('ml');
-        } else if (path.startsWith('/about')) {
+        } else if (hash === '#about') {
             this.showSection('about');
         } else {
+            // Default to home for empty hash or unrecognized routes
             this.showSection('home');
         }
     }
 
-    updateUrl(path, title = '') {
-        if (window.location.pathname !== path) {
-            window.history.pushState({ path, title }, title, path);
-            // Prevent the default navigation
-            event.preventDefault();
+    updateUrl(hash, title = '') {
+        if (window.location.hash !== hash) {
+            window.location.hash = hash;
         }
         if (title) {
             document.title = title + ' - TheInterviewCode';
@@ -259,20 +242,19 @@ class TheInterviewCodeApp {
 
         // Handle all clicks through event delegation
         document.addEventListener('click', (e) => {
-            // Find clicked elements
-            const navLink = e.target.closest('[data-section]');
-            const readMoreBtn = e.target.closest('.read-more');
-            const questionCard = e.target.closest('.question-card');
-            
             // Handle navigation links
+            const navLink = e.target.closest('[data-section]');
             if (navLink && navLink.hasAttribute('data-section')) {
                 e.preventDefault();
                 const section = navLink.getAttribute('data-section');
                 this.navigateToSection(section);
                 return;
             }
+
+            // Handle question card clicks
+            const readMoreBtn = e.target.closest('.read-more');
+            const questionCard = e.target.closest('.question-card');
             
-            // Handle View Explanation/Solution clicks
             if (readMoreBtn && questionCard) {
                 e.preventDefault();
                 const slug = questionCard.dataset.questionSlug;
@@ -281,27 +263,14 @@ class TheInterviewCodeApp {
                     console.error('Missing question data:', { slug, type });
                     return;
                 }
-                this.showQuestionBySlug(slug, type);
-                return;
-            }
-
-            // Handle question card clicks
-            const card = e.target.closest('.question-card');
-            const readMore = e.target.closest('.read-more');
-            if (card && card.dataset.questionSlug && card.dataset.questionType && readMore) {
-                e.preventDefault();
-                e.stopPropagation();
-                const slug = card.dataset.questionSlug;
-                const type = card.dataset.questionType;
                 this.navigateToQuestion(slug, type);
-                return false; // Prevent any default navigation
+                return;
             }
 
             // Handle related question card clicks
             const relatedCard = e.target.closest('.related-question-card');
             if (relatedCard && relatedCard.dataset.questionSlug && relatedCard.dataset.questionType) {
                 e.preventDefault();
-                e.stopPropagation();
                 const slug = relatedCard.dataset.questionSlug;
                 const type = relatedCard.dataset.questionType;
                 this.navigateToQuestion(slug, type);
@@ -323,8 +292,8 @@ class TheInterviewCodeApp {
             }
         });
 
-        // Handle browser navigation
-        window.addEventListener('popstate', (e) => {
+        // Handle browser navigation (back/forward buttons)
+        window.addEventListener('hashchange', (e) => {
             this.handleInitialRoute();
         });
 
@@ -371,14 +340,6 @@ class TheInterviewCodeApp {
             });
         }
 
-        // Prevent all link navigation and handle through our router
-        document.addEventListener('click', (e) => {
-            const link = e.target.closest('a');
-            if (link && link.href && link.href.startsWith(window.location.origin)) {
-                e.preventDefault();
-            }
-        });
-
         // Social sharing and print
         this.setupSocialSharing();
 
@@ -395,7 +356,7 @@ class TheInterviewCodeApp {
             if (e.target.id === 'shareTwitter') {
                 e.preventDefault();
                 const url = encodeURIComponent(window.location.href);
-                const text = encodeURIComponent(`Check out this solution: ${this.currentQuestion?.title || 'TechPrep Question'}`);
+                const text = encodeURIComponent(`Check out this solution: ${this.currentQuestion?.title || 'TheInterviewCode Question'}`);
                 window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
             }
 
@@ -425,46 +386,37 @@ class TheInterviewCodeApp {
     }
 
     navigateToSection(sectionName) {
-        const paths = {
-            'home': '/',
-            'dsa': '/dsa',
-            'ml': '/ml',
-            'about': '/about'
+        const hashes = {
+            'home': '#home',
+            'dsa': '#dsa',
+            'ml': '#ml',
+            'about': '#about'
         };
         
-        const path = paths[sectionName] || '/';
+        const hash = hashes[sectionName] || '#home';
         const title = this.getSectionTitle(sectionName);
         
-        this.updateUrl(path, title);
+        this.updateUrl(hash, title);
         this.showSection(sectionName);
     }
 
-    navigateToQuestion(questionSlug, type, event) {
-        if (event) {
-            event.preventDefault();
-        }
-        const path = `/${type}/${questionSlug}`;
+    navigateToQuestion(questionSlug, type) {
+        const hash = `#${type}/${questionSlug}`;
         const question = this.getQuestionBySlug(questionSlug, type);
         const title = question ? question.title : 'Question';
         
-        // First show the question content
+        this.updateUrl(hash, title);
         this.showQuestionBySlug(questionSlug, type);
-        
-        // Then update the URL without causing a page reload
-        window.history.pushState({ path, title }, title, path);
-        document.title = title + ' - TechPrep';
-        
-        return false;
     }
 
     getSectionTitle(section) {
         const titles = {
-            'home': 'TechPrep - DSA & ML Interview Questions',
+            'home': 'TheInterviewCode - DSA & ML Interview Questions',
             'dsa': 'Data Structures & Algorithms',
             'ml': 'Machine Learning Questions',
-            'about': 'About TechPrep'
+            'about': 'About TheInterviewCode'
         };
-        return titles[section] || 'TechPrep';
+        return titles[section] || 'TheInterviewCode';
     }
 
     getQuestionBySlug(slug, type) {
@@ -495,7 +447,6 @@ class TheInterviewCodeApp {
                 categoryFilter.appendChild(option);
             });
         }
-        // topicFilter dropdown is not populated anymore
     }
 
     showSection(sectionName) {
@@ -537,16 +488,13 @@ class TheInterviewCodeApp {
         const filterControls = document.querySelector('.filter-controls');
         const difficultyFilter = document.getElementById('difficultyFilter');
         const categoryFilter = document.getElementById('categoryFilter');
-        const topicFilter = document.getElementById('topicFilter');
-        this.currentSection = sectionName; // <-- Move this line BEFORE populateFilters
+        this.currentSection = sectionName;
 
         if (filterControls) {
             if (sectionName === 'dsa' || sectionName === 'ml') {
                 filterControls.style.display = 'flex';
                 if (difficultyFilter) difficultyFilter.style.display = '';
                 if (categoryFilter) categoryFilter.style.display = '';
-                if (topicFilter) topicFilter.style.display = 'none';
-                // Repopulate category dropdown for correct section
                 this.populateFilters();
             } else {
                 filterControls.style.display = 'none';
@@ -597,12 +545,6 @@ class TheInterviewCodeApp {
         this.updateBreadcrumb(question, type);
         this.renderSolutionPage(question, type);
         this.showSection('solution');
-        
-        // Update URL without page reload
-        const path = `/${type}/${questionSlug}`;
-        const title = question.title;
-        window.history.pushState({ path, title }, title, path);
-        document.title = title + ' - TechPrep';
     }
 
     updateBreadcrumb(question, type) {
@@ -611,7 +553,7 @@ class TheInterviewCodeApp {
         
         if (breadcrumbSection) {
             const sectionName = type === 'dsa' ? 'DSA' : 'Machine Learning';
-            breadcrumbSection.innerHTML = `<a href="/${type}" data-section="${type}">${sectionName}</a>`;
+            breadcrumbSection.innerHTML = `<a href="#${type}" data-section="${type}">${sectionName}</a>`;
         }
         
         if (breadcrumbQuestion) {
@@ -782,12 +724,10 @@ class TheInterviewCodeApp {
         const searchInput = document.getElementById('searchInput');
         const difficultyFilter = document.getElementById('difficultyFilter');
         const categoryFilter = document.getElementById('categoryFilter');
-        const topicFilter = document.getElementById('topicFilter');
         
         if (searchInput) searchInput.value = '';
         if (difficultyFilter) difficultyFilter.value = '';
         if (categoryFilter) categoryFilter.value = '';
-        if (topicFilter) topicFilter.value = ''; // topicFilter remains but is hidden
         
         this.dsaDisplayCount = 9;
         this.mlDisplayCount = 12;
@@ -881,7 +821,6 @@ class TheInterviewCodeApp {
         const topicPills = document.getElementById('mlTopicPills');
         if (!topicPills) return;
 
-        // Defensive: filter out empty/null categories
         const categories = [...new Set(this.mlQuestions.map(q => q.category).filter(Boolean))];
         topicPills.innerHTML = categories.map(category => 
             `<span class="topic-pill" data-category="${category}">${category}</span>`
@@ -912,7 +851,6 @@ class TheInterviewCodeApp {
                 (Array.isArray(question.tags) && question.tags.some(tag => tag.toLowerCase().includes(this.searchTerm)));
 
             const matchesDifficulty = this.difficultyFilter === '' || question.difficulty === this.difficultyFilter;
-            // Defensive: category may be missing
             const matchesCategory = this.categoryFilter === '' || 
                 (question.category && question.category === this.categoryFilter) ||
                 (Array.isArray(question.tags) && question.tags.includes(this.categoryFilter));
@@ -971,10 +909,8 @@ class TheInterviewCodeApp {
         const container = document.getElementById('mlQuestions');
         if (!container) return;
 
-        // Clear existing content
         container.innerHTML = '';
         
-        // Display filtered questions
         if (this.filteredMLQuestions && this.filteredMLQuestions.length > 0) {
             this.filteredMLQuestions.slice(0, this.mlDisplayCount).forEach(question => {
                 const card = this.createQuestionCard(question, 'ml');
@@ -993,7 +929,6 @@ class TheInterviewCodeApp {
             return null;
         }
 
-        // Ensure question has a slug
         if (!question.slug) {
             question.slug = this.generateSlug(question.title);
         }
@@ -1004,7 +939,6 @@ class TheInterviewCodeApp {
         card.dataset.questionType = type;
 
         const difficultyClass = (question.difficulty || 'Easy').toLowerCase();
-        // Defensive: Use question.question for ML, question.problem for DSA, fallback to title
         let content = '';
         if (type === 'dsa') {
             content = question.problem || question.title || '';
@@ -1013,7 +947,6 @@ class TheInterviewCodeApp {
         }
         const preview = content.length > 150 ? content.substring(0, 150) + '...' : content;
 
-        // Defensive: tags may be missing or not an array
         const tags = Array.isArray(question.tags) ? question.tags : [];
 
         card.innerHTML = `
@@ -1031,12 +964,6 @@ class TheInterviewCodeApp {
         `;
 
         return card;
-    }
-
-    escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
     }
 
     loadMoreQuestions() {
@@ -1064,10 +991,10 @@ class TheInterviewCodeApp {
     generateSlug(text) {
         return text
             .toLowerCase()
-            .replace(/[^a-z0-9\s-]/g, '') // Remove all non-word chars
-            .replace(/\s+/g, '-')          // Replace spaces with -
-            .replace(/--+/g, '-')          // Replace multiple - with single -
-            .replace(/^-+|-+$/g, '');      // Trim - from start and end
+            .replace(/[^a-z0-9\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/--+/g, '-')
+            .replace(/^-+|-+$/g, '');
     }
 
     updateLoadingIndicator(type) {
